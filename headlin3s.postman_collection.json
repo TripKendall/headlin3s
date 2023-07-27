@@ -1,0 +1,1426 @@
+{
+	"info": {
+		"_postman_id": "699955e9-ed9c-4970-b6e3-3abf1a657b97",
+		"name": "headlin3s",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23206776"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Trips Kendall\",\n  \"email\": \"trispkendall@gmail.com\",\n  \"password\": \"redfred!!\",\n  \"role\": \"publisher\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"james@jamesturner.dev\",\n  \"password\": \"redfred!!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/me/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me",
+								""
+							]
+						},
+						"description": "This is the route to find out who the current logged in use is."
+					},
+					"response": []
+				},
+				{
+					"name": "ForgotPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/forgotpassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgotpassword"
+							]
+						},
+						"description": "send this route and email address and it generates a token so a user can submit a PUT request to reset password."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"mjktek01\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/resetpassword/dc185d7bace3a5cf952684d9df8a04f087e3297e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"resetpassword",
+								"dc185d7bace3a5cf952684d9df8a04f087e3297e"
+							]
+						},
+						"description": "This is used after the forgot password token has been generated."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JimmiJames\",\n    \"email\": \"jimmi@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/updatedetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatedetails"
+							]
+						},
+						"description": "Simple user update."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\": \"mjktek01\",\n    \"newPassword\": \"test!ing\"\n\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/updatepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatepassword"
+							]
+						},
+						"description": "This is the route for a logged in user to update (change ) their password. This is not the forgot my password deal."
+					},
+					"response": []
+				},
+				{
+					"name": "Logout / Clear cookie",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						},
+						"description": "The Admin route to get all users. Admin can only be set in the DB."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/632898e080f98d848bcb8b1a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"632898e080f98d848bcb8b1a"
+							]
+						},
+						"description": "The Admin route to get a single users details."
+					},
+					"response": []
+				},
+				{
+					"name": "Add Users Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\n\t\t\"name\": \"John Doe\",\n\t\t\"email\": \"john@gmail.com\",\n\t\t\"role\": \"publisher\",\n\t\t\"password\": \"12345678\"\n\t}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						},
+						"description": "The admin route for adding a user."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Users Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\n\t\t\"name\": \"John Doze\"\n\t}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/632b5295f9724c6dc7aff3e8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"632b5295f9724c6dc7aff3e8"
+							]
+						},
+						"description": "This is the admin route to delete a user. careful - cannot un-do."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orgs",
+			"item": [
+				{
+					"name": "CreateOrg",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjQ5Nzk4MDFlZWYyODAyYjc1Y2FmZCIsImlhdCI6MTY2MzM1Nzc4OSwiZXhwIjoxNjY1OTQ5Nzg5fQ.1lCPquiCMtPZUmLTq0le29n462hPrMJJolCEJ5Nbti8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Original Headlin3s\",\n    \"desc\": \"The original Headlin3s.com data set from the 2020Buzz database at google cloud.\",\n    \"img\": \"https://picsum.photos/640/360\",\n    \"tags\": [\n        \"original\",\n        \"first\",\n        \"gcp\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/org",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"org"
+							]
+						},
+						"description": "Private POST route to create a market - only publisher or admin."
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllBlogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/blog",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"blog"
+							]
+						},
+						"description": "Get all markets. This uses the advancedResults middleware for pagination, sorting, filtering, etc."
+					},
+					"response": []
+				},
+				{
+					"name": "getGalleryByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/gallery/?name=gop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"gallery",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "gop"
+								}
+							]
+						},
+						"description": "This is the public Get all items. It uses advancedResults middleware."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Gallery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/gallery/63ce905aa2cb24d5d1310a0d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"gallery",
+								"63ce905aa2cb24d5d1310a0d"
+							]
+						},
+						"description": "Get a single market by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Directory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tags\":[\"updated\",\"or\",\"not\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/63287fa1b45e2aef049b61b4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								"63287fa1b45e2aef049b61b4"
+							]
+						},
+						"description": "The route for the owner of a market to update it."
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Market Photo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/james/Desktop/1.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/4d713995b721c3bb38c1f5d0/photo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								"4d713995b721c3bb38c1f5d0",
+								"photo"
+							]
+						},
+						"description": "The route to upload market photo."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete market",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/4d713995b721c3bb38c1f5d0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								"4d713995b721c3bb38c1f5d0"
+							]
+						},
+						"description": "Auth / Owner route to delete a market - careful it will be gone..."
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllMarkets - with query params!!!",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/?location.state=VA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								""
+							],
+							"query": [
+								{
+									"key": "location.state",
+									"value": "VA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllMarkets - with only selected fields!!",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/?select=name,description",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								""
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "name,description"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllMarkets - page limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/?page=2&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllMarkets -  selected fields filtered by fields and sorted",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/?select=name,description,location.state&sort=name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								""
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "name,description,location.state"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllMarkets - selected fields filtered by field",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/markets/?select=name,description,location.state&location.state=VA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"markets",
+								""
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "name,description,location.state"
+								},
+								{
+									"key": "location.state",
+									"value": "VA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select with Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/items?select=title",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "title"
+								}
+							]
+						},
+						"description": "An example of using the advancedResults middleware to select certain params."
+					},
+					"response": []
+				},
+				{
+					"name": "Items with pagnation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/items?page=2&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						},
+						"description": "An example of using the advancedResults middleware to do pagination with items."
+					},
+					"response": []
+				}
+			],
+			"description": "All the market specific routes."
+		},
+		{
+			"name": "Links",
+			"item": [
+				{
+					"name": "AddLink",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"name\": \"Doggone it\",\n        \"url\": \"https://images.unsplash.com/photo-1585849847025-256a1488e653?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwyNTk3OTl8MHwxfHNlYXJjaHw0fHxkb2dzJTIwY2F0c3xlbnwwfHx8fDE2NzU5NTgzMzM&ixlib=rb-4.0.3&q=80\",\n        \"image\": \"https://images.unsplash.com/photo-1509205477838-a534e43a849f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwyNTk3OTl8MHwxfHNlYXJjaHwzfHxkb2dzJTIwY2F0c3xlbnwwfHx8fDE2NzU5NTgzMzM&ixlib=rb-4.0.3&q=80\",\n\t\t\"desc\": \"Dogs rule cats drool?\",\n        \"clicks\": 3,\n        \"rating\": 3,\n        \"similar\":[],\n        \"tags\": [\"cats\", \"cat man\"],\n        \"pol\": 1,\n\t\t\"category\": \"news\",\n        \"dateline\": \"Florida\"\n\t}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/org/63fcba2a292f0a3e8fe0f21e/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"org",
+								"63fcba2a292f0a3e8fe0f21e",
+								"links"
+							]
+						},
+						"description": "Add item to market. Must be logged in as publisher and owner of the market."
+					},
+					"response": []
+				},
+				{
+					"name": "GetLinks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/links",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"links"
+							]
+						},
+						"description": "This is the public Get all items. It uses advancedResults middleware."
+					},
+					"response": []
+				},
+				{
+					"name": "GetLinksByOrg",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/gallery/6393734ceeb01a6d62e44354/images",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"gallery",
+								"6393734ceeb01a6d62e44354",
+								"images"
+							]
+						},
+						"description": "Get the items form a market by market id. Processed with advancedResults so it's sortable, filterable, etc."
+					},
+					"response": []
+				},
+				{
+					"name": "GetLinkByTag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/links/?sortBy=clicks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"links",
+								""
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "clicks"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLinksByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/links/?category=sports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"links",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "sports"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLinkByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/images/63938495562f55ff0e47f8a9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"images",
+								"63938495562f55ff0e47f8a9"
+							]
+						},
+						"description": "Get a single Item by it's ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/links/63697d62c1e7da2bc1ebdc51",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"links",
+								"63697d62c1e7da2bc1ebdc51"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"cost\": 18000\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/links/6372831a4c4af9aa639f33e2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"links",
+								"6372831a4c4af9aa639f33e2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suggest Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{{{TOKEN}}}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"emailAddress\": \"james@jamestown.org\",\n    \"linkUrl\": \"https://test.com\",\n    \"linkTitle\": \"Suggest Headlin3\",\n    \"linkDescription\": \"This is email message\",\n    \"linkCat\": \"news\",\n    \"linkTags\": \"test,test2,test3\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/suggest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"suggest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Suggested Link Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{{{TOKEN}}}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/suggested/63690c4053ca9bc207ade3b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"suggested",
+								"63690c4053ca9bc207ade3b8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All of the Item specific routes."
+		},
+		{
+			"name": "GetLinkCount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserCount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/count/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"count",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "JSON Type",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"searchTerm\": \"how else a're the /mermaids supoose the feel was then mermaids ARE MerMaidds!!##\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "JSON Type",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"63ce9756a2cb24d5d1310a30\",\n    \"vote\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/vote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTk1YmIxMWRjNzNjNjI1ZDA3NGE4MCIsImlhdCI6MTY2ODI5MTc3NiwiZXhwIjoxNjcwODgzNzc2fQ.jn3MO04dXbAH8nbfN83bl2YsnVsE_b41GakrRvyJAh"
+		},
+		{
+			"key": "{{TOKEN}}",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTk1YmIxMWRjNzNjNjI1ZDA3NGE4MCIsImlhdCI6MTY2ODQ0ODc1NCwiZXhwIjoxNjcxMDQwNzU0fQ.GlXwR_ONdRL_6uEianffg7AcnWbxW2ZN15eob7yWiwU"
+		}
+	]
+}

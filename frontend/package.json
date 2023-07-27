@@ -1,0 +1,25 @@
+{
+  "name": "headlin3s",
+  "version": "2.8.8",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.4",
+    "@heroicons/vue": "^2.0.11",
+    "@vueuse/core": "^9.6.0",
+    "sweetalert2": "^11.7.0",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.13",
+    "vue-social-sharing": "^4.0.0-alpha4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.5",
+    "vitawind": "^2.0.0",
+    "vite": "^2.7.2"
+  }
+}
